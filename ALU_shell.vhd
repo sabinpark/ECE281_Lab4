@@ -77,15 +77,11 @@ aluswitch: process (Accumulator, Data, OpSel)
 			-- ROR (rotate the data one bit to the right with wrap-around)
 			when "011" =>
 			
-			-- QUESTION:  Why doesn't the temp signal work?
-			
---				ROR_Result(3) <= Accumulator(0);
---				ROR_Result(2) <= Accumulator(3);
---				ROR_Result(1) <= Accumulator(2);
---				ROR_Result(0) <= Accumulator(1);
 				temp_Result(2 downto 0) <= Accumulator(3 downto 1);
 				temp_Result(3) <= Accumulator(0);
---				temp_Result <= ROR_Result;
+				
+				-- other way to do ROR
+				-- temp_Result <= std_logic_vector(unsigned(Accumulator) ror 1);
 				
 			-- OR
 			when "100" =>
