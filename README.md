@@ -25,5 +25,23 @@ After downloading the appropriate files, my first task was to write code inside 
 | 0 | AND
 | 1 | NEG
 | 2 | NOT
+| 3 | ROR
+| 4 | OR
+| 5 | IN 
+| 6 | ADD
+| 7 | LDA
+
+
+Under *ARCHITECTURE*, I created a std_logic_vector called *temp_Result*, which was used to store the value of what *Result* would ultimately be.  I proceeded to use the case statement method of creating the MUX.  Because *OpSel* determined which function the ALU accomplish, it was easy to see that *OpSel* would also act as the case.  Writing the actual code for the different functions was not all too difficult--all but one of the functionality took only one line of code.
+
+The only trouble I had was in ROR.  I first attempted to create an intermediary signal which would store the "shifted" values of the *Accumulator*, then send in the intermediary signal to *temp_Result*.  However, when I simulated the design, I had errors.  I then changed my approach to the problem by directly assigning *temp_Result* to the appropriate values from *Accumulator*.
+
+After checking my syntax and making sure nothing was wrong with the code, I proceeded to simulate the ALU using the provided testbench.
+
+### ALU Simulation
+
+The simulation ran successfully, displaying a beautiful wave of green results.  I went through each of the *OpSel* values with their corresponding values for *Accumulator* and *Data*.  I am happy to say that all of the values were correct.  Most of the funcionality is quite self-explanatory--they did what they were supposed to.  And so I find it unnecessary to go into depth for each part.
+
+![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/ALU_Simulation.PNG "ALU Simulation")
 
 ## Datapath
