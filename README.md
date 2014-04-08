@@ -34,7 +34,12 @@ After downloading the appropriate files, my first task was to write code inside 
 
 Under *ARCHITECTURE*, I created a std_logic_vector called *temp_Result*, which was used to store the value of what *Result* would ultimately be.  I proceeded to use the case statement method of creating the MUX.  Because *OpSel* determined which function the ALU accomplish, it was easy to see that *OpSel* would also act as the case.  Writing the actual code for the different functions was not all too difficult--all but one of the functionality took only one line of code.
 
-The only trouble I had was in ROR.  I first attempted to create an intermediary signal which would store the "shifted" values of the *Accumulator*, then send in the intermediary signal to *temp_Result*.  However, when I simulated the design, I had errors.  I then changed my approach to the problem by directly assigning *temp_Result* to the appropriate values from *Accumulator*.
+The only trouble I had was in ROR.  I first attempted to create an intermediary signal which would store the "shifted" values of the *Accumulator*, then send in the intermediary signal to *temp_Result*.  However, when I simulated the design, I had errors in that the values I should have gotten were all shifted to the right.  This error occurred because the intermediary signal acted as a latch and took in the previous value of the intermediary signal.  I then changed my approach to the problem by directly assigning *temp_Result* to the appropriate values from *Accumulator*.  This fixed the problem and ROR worked as expected.
+
+*UPDATE:* I found another way to do the ROR functionality using the built-in functionality within ISE.
+```vhdl
+    temp_Result <= std_logic_vector(unsigned(Accumulator) ror 1);
+```
 
 After checking my syntax and making sure nothing was wrong with the code, I proceeded to simulate the ALU using the provided testbench.
 
