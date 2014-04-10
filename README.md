@@ -50,3 +50,7 @@ The simulation ran successfully, displaying a beautiful wave of green results.  
 ![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/ALU_Simulation.PNG "ALU Simulation")
 
 ## Datapath
+
+### Datapath Simulation
+
+![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/Datapath_Simulation.PNG "Datapath Simulation")
