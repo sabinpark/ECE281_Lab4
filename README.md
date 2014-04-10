@@ -53,4 +53,8 @@ The simulation ran successfully, displaying a beautiful wave of green results.  
 
 ### Datapath Simulation
 
+After writing code for the Datapath shell, I proceeded to simulate the testbench file.  There were two errors that I needed to correct: an extra semicolon and an extra comma.  These errors were quickly fixed.
+
+I checked my syntax and started the testbench simulation.  The results were successful--the simulation matched the provided answer in the lab handout.  The problem I had to verify the simulation, however, resulted from the fact that my file path for the Lab4_waveform.wcfg was not properly inserted, resulting in precious minutes lost to submit the simulation in time.  In the end, I was able to fix the minor error.  The resulting simulation is shown below.
+
 ![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/Datapath_Simulation.PNG "Datapath Simulation")
