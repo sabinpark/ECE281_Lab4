@@ -62,6 +62,26 @@ Below is an image of the simulation results:
 
 The datapath is an important part of the CPU.  It contains the instruction register, the program counter, and the ALU, and performs data processing operations.
 
+#### Datapath Functionality 
+| Mnemonic  | Encoding 
+|:------:|:---------
+| NOP | 0000
+| NEG | 0001
+| NOT | 0010
+| ROR | 0011
+| OUT | 0100 aaaa
+| IN | 0101 aaaa
+| ADDI | 0110 vvvv
+| LDAI | 0111 vvvv
+| AND | 1000 aaaa aaaa
+| JMP | 1001 aaaa aaaa
+| JZ | 1010 aaaa aaaa
+| JN | 1011 aaaa aaaa
+| OR | 1100 aaaa aaaa
+| STA | 1101 aaaa aaaa
+| ADDD | 1110 aaaa aaaa
+| LDAD | 1111 aaaa aaaa
+
 #### Datapath Coding
 
 The datapath subsystem circuit on page 3 of the lab handout was very helpful for implementing all of the parts of the datapath.
@@ -159,12 +179,12 @@ The initial analysis was provided for by Captain Silva.
 
 ### 50 to 100 ns
 The results from 50 ns to 100 ns are shown below:
-![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/Datapath_Simulation_0_to_50.PNG "Datapath Simulation from 50 to 100 ns")
+![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/Datapath_Simulation_50_to_100.PNG "Datapath Simulation from 50 to 100 ns")
 
-At 50 ns, we see that the IR is completing the LDAI command (IR = 7).  Also, 3 is put into the data bus with the IRLd set to true.  Thus, the IR will read a 3 during the beginning of the next cycle (55 ns).  3 is the opcode for ROR.  Therefore, at the next cycle, the operand, "1011", is rotated.  The cycle following that, the accumulator takes in the value of ROR(1011), which is "1101".  The cycle starting at 75 ns begins with the data bus taking in 4.  The opcode for 4 is "OUT".  We see that beginning at 85 ns, the IR takes in the opcode value of 4.  Simultaneously, the operand, 3, is put into the data bus.  The cycle at 95 ns, we see that 3 is ready to be output.  As for the Address, each address value corresponds exactly with the program counter value (at least for the segment from 50 to 100 ns).
+At 50 ns, we see that the IR is completing the LDAI command (IR = 7).  Also, 3 is put into the data bus with the IRLd set to true.  Thus, the IR will read a 3 during the beginning of the next cycle (55 ns).  3 is the opcode for ROR.  Therefore, at the next cycle, the operand, "1011", is rotated.  The cycle following that, the accumulator takes in the value of ROR(1011), which is "1101".  The cycle starting at 75 ns begins with the data bus taking in 4.  The opcode for 4 is "OUT".  We see that beginning at 85 ns, the IR takes in the opcode value of 4.  Simultaneously, the operand, 3, is put into the data bus.  The cycle at 95 ns, we see that the accumulator value is ready to be output into address 3 (through the updating of MARLo).
 
 ### Jump Instruction at 225 ns
 The results at 225 ns are shown below:
-![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/Datapath_Simulation_250.PNG "Datapath Simulation at the jump instruction")
+![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/Datapath_Simulation_225.PNG "Datapath Simulation at the jump instruction")
 
 At 195 ns, the IR reads in a value of "b" which corresponds to the opcode for JN.  JN jumps to the given address if the accumulator value is a negative number.  The accumulator value is indeed negative (1101).  At 205 ns, MARLo is loaded with the value from the accumulator with a data value of 2.  At 215 ns, MARHi is loaded with the value from the accumulator with a data value of 0. Thus, the address will be 02 as shown in 225 ns.  Also at 225 ns, *jmpsel* is set to 1.  At the same time, *addrsel* is also set to 1.  Corresponding with those signals, the address to jump to is the current address value, which is a 02.  We see that at 235 ns, the new address is indeed 02.
