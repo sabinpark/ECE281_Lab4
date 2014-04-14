@@ -195,10 +195,12 @@ To obtain the program listing of the instructions being executed, I went from th
 6. If the accumulator value is a negative, then the program will return to step 2
 7. If the accumulator value is not negative, then the program will reach an infinite loop
 
+Specifically, this program loops back through to the ROR step two more times and ends up in the infinite loop with the stored value of 7.
+
 Below is the program listing with addresses:
 
 ![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/ProgramListing.PNG "Program Listing")
 
 ## Documentation
 
-None.
+I double checked my program listing with C3C El-Saawy's program listing and found that the two did match.  No other help received.
