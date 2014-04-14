@@ -168,11 +168,6 @@ This next part is where I will analyze the simulation.  There are three time seg
 * Time period from 50 to 100 ns
 * The jump instruction at 225 ns
 
-Each segment will have two parts of analysis:
-
-* Address Locations
-* Detailed analysis of the simulation
-
 ### 0 to 50 ns
 
 The initial analysis was provided for by Captain Silva.  
@@ -187,4 +182,23 @@ At 50 ns, we see that the IR is completing the LDAI command (IR = 7).  Also, 3 i
 The results at 225 ns are shown below:
 ![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/Datapath_Simulation_225.PNG "Datapath Simulation at the jump instruction")
 
-At 195 ns, the IR reads in a value of "b" which corresponds to the opcode for JN.  JN jumps to the given address if the accumulator value is a negative number.  The accumulator value is indeed negative (1101).  At 205 ns, MARLo is loaded with the value from the accumulator with a data value of 2.  At 215 ns, MARHi is loaded with the value from the accumulator with a data value of 0. Thus, the address will be 02 as shown in 225 ns.  Also at 225 ns, *jmpsel* is set to 1.  At the same time, *addrsel* is also set to 1.  Corresponding with those signals, the address to jump to is the current address value, which is a 02.  We see that at 235 ns, the new address is indeed 02.
+At 195 ns, the IR reads in a value of "b" which corresponds to the opcode for JN.  JN jumps to the given address if the accumulator value is a negative number.  The accumulator value is indeed negative (1101).  At 205 ns, MARLo is loaded with the value from the accumulator with a data value of 2.  At 215 ns, MARHi is loaded with the value from the accumulator with a data value of 0. Thus, the address will be 02 as shown in 225 ns.  Also at 225 ns, *jmpsel* is set to 1.  At the same time, *addrsel* is also set to 1.  Corresponding with those signals, the address to jump to is the current address value, which is a 02.  We see that at 235 ns, the new address we have jumped to is indeed 02.
+
+To obtain the program listing of the instructions being executed, I went from the beginning and checked the values of the instruction register, the data bus, the addresses, and other pertinent signal values.  Simultaneously, input the instructions into the PRISM Simulator.  I double checked my analysis with the simulation and found that everything was as expected.  
+
+*NOTE*  Essentially, what I have found by stepping through the simulation results is that:
+1. The program initially loads in a value of B to the accumulator
+2. The current value in the accumulator is rotated once and updated into the accumulator
+3. The new accumulator value is output into the output port 3
+4. No operation is performed
+5. The current accumulator value is stored into a different address
+6. If the accumulator value is a negative, then the program will return to step 2
+7. If the accumulator value is not negative, then the program will reach an infinite loop
+
+Below is the program listing with addresses:
+
+![alt text](https://raw.githubusercontent.com/sabinpark/ECE281_Lab4/master/ProgramListing.PNG "Program Listing")
+
+## Documentation
+
+None.
