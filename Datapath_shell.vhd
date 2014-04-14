@@ -14,7 +14,7 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description : contains the code for the IR (instruction register, PC (program counter), and the ALU (arithmetic logic unit)
 --
 -------------------------------------------------------------------------------
 
