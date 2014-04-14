@@ -125,7 +125,7 @@ begin
   	begin
 		if(Reset_L = '0') then
 			MARLo <= "0000";
-		elsif (rising_edge(Clock) and MARHiLd ='0') then
+		elsif (rising_edge(Clock) and MARLoLd ='1') then
 			MARLo <= Data;
 		end if;
   	end process; 
@@ -135,10 +135,10 @@ begin
 	
 	process(Clock, Reset_L, PC, AddrSel)
   	begin				 
-		if(AddrSel = '0') then
+		if(AddrSel = '1') then
 			Addr(7 downto 4) <= MARHi;
 			Addr(3 downto 0) <= MARLo;
-		elsif (AddrSel = '1') then
+		elsif (AddrSel = '0') then
 			Addr <= PC;
 		end if;
   	end process;   
@@ -170,8 +170,8 @@ begin
 	Data <= Accumulator when EnAccBuffer = '1' else "ZZZZ";  -- when the buffer is active, take in Accumulator, otherwise take nothing
 	  
   	-- Complete the code to implement the Datapath status signals --
-   AlessZero <= '1' when Accumulator(3) = '1';  --Uses MSB as a sign bit
-  	AeqZero <= '0' when Accumulator = "0000";
+   AlessZero <= '1' when Accumulator(3) = '1' else '0';  --Uses MSB as a sign bit
+  	AeqZero <= '1' when Accumulator = "0000" else '0';
 			   
 end Datapath;
 
